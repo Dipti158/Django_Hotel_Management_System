@@ -1,0 +1,21 @@
+
+{% extends 'app_hotel/base.html' %}
+{% block content %}
+
+<div class="row">
+    <div class="col-6">
+
+        <h4> Add New Customer </h4>
+
+        <form action="" method="POST">
+            {% comment %} to ensure that the form submission is made by the same user who loaded the form {% endcomment %}
+            {% csrf_token %} 
+            {% comment %} render form object 'ct' {% endcomment %}
+            {{ ct.as_p }}
+            <input type="submit" class="btn btn-success" value="Add">
+        </form>
+
+    </div>
+</div>
+
+{% endblock content %}

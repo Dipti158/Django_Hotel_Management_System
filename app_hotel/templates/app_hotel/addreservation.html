@@ -1,0 +1,46 @@
+
+
+{% extends "app_hotel/base.html" %}
+
+{% block content %}
+    <h1> Reservation List </h1>
+
+    {% if reservation %}
+    <table class="table table-secondary table-striped my-5">
+        <thead>
+            <tr>
+                <th scope="col"> Customer Name </th>
+                <th scope="col"> CheckIn Date </th>
+                <th scope="col"> CheckOut Date </th>
+                <th scope="col"> Room </th>
+                <th scope="col"> Is Paid </th>
+                <th scope="col"> Total Amount </th>
+                <th scope="col"> Created By </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rs in reservation %}
+            <tr>
+                <td>{{ rs.customer_name }}</td>
+                <td>{{ rs.check_in_date }}</td>
+                <td>{{ rs.check_out_date }}</td>
+                <td>{{ rs.room }}</td>
+                <td>{{ rs.is_paid }}</td>
+                <td>{{ rs.total_amount }}</td>
+                <td>{{ rs.created_by }}</td>
+
+                <td>  <a href="{% url 'updatereservation' rs.id %}" class= "btn btn-warning btn-sm"> Edit </a> 
+                    <form action="{% url 'deletereservation' rs.id %}" method="POST" class="d-inline">
+                        {% csrf_token %}
+                        <input type="submit" value="Delete" class="btn btn-danger btn-sm">
+                    </form>
+                    </td> 
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <h4 class="text-center alert alert-warning"> No Records </h4>
+    {% endif %}
+{% endblock %}

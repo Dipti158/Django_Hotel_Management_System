@@ -1,0 +1,42 @@
+
+{% extends "app_hotel/base.html" %}
+
+{% block content %}
+    <h1>Room List</h1>
+
+    {% if room %}
+    <table class="table table-secondary table-striped my-5">
+        <thead>
+            <tr>
+                <th scope="col">Room Number</th>
+                <th scope="col">Room Type</th>
+                <th scope="col">Room Price</th>
+                <th scope="col">Description</th>
+                <th scope="col">Is Available</th>
+                <th scope="col"> Action </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rm in room %}
+            <tr>
+                <td>{{ rm.room_number }}</td>
+                <td>{{ rm.room_type }}</td>
+                <td>{{ rm.room_price }}</td>
+                <td>{{ rm.description }}</td>
+                <td>{{ rm.is_available }}</td>
+                <td>  <a href="{% url 'updateroom' rm.id %}" class= "btn btn-warning btn-sm"> Edit </a> 
+                <form action="{% url 'deleteroom' rm.id %}" method="POST" class="d-inline">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete" class="btn btn-danger btn-sm">
+                </form>
+                </td> 
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <h4 class="text-center alert alert-warning"> No Records </h4>
+    {% endif %}
+{% endblock %}
+

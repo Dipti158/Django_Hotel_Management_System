@@ -1,0 +1,103 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>User Registration</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('hotel_background.jpg'); /* Replace 'hotel_background.jpg' with your image path */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px #000;
+        }
+
+        .card h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            border-radius: 5px;
+        }
+
+        .btn-signup {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-signup:hover {
+            background-color: #0056b3;
+        }
+
+        .login-link {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <h2>User Registration</h2>
+        {% comment %} {% if messages %}
+        {% for message in messages %}
+            <small {% if message.tags %} class="{{message.tags}}" {% endif %} > {{ message }}</small>
+        {% endfor %}
+        {% endif %} {% endcomment %}
+        <form action="" method="post" novalidate>
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                    <p class='er'>{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+            {% for fm in form %}
+            <div class="form-group">
+                <label for="{{ fm.id_for_label }}">{{ fm.label_tag }}</label>
+                {{ fm }} {{ fm.errors|striptags }}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-signup btn-block">Submit</button>
+        </form>
+        <div class="login-link">
+            <span>Already have an account?</span> <a href="{% url 'login' %}" class="btn btn-link">Login</a>
+        </div>
+    </div>
+</div>
+<!-- Include Bootstrap JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

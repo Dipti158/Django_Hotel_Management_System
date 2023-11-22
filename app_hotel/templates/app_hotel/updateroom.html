@@ -1,0 +1,19 @@
+
+{% extends "app_hotel/base.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-8 offset-2">
+        <h4 class="alert alert-info"> Update Room </h4>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Update" class="btn btn-success">
+
+            <a href="{% url 'addroom' %}" class="btn btn-info"> Back To Home </a>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

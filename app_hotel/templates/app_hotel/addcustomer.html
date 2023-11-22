@@ -1,0 +1,41 @@
+
+
+{% extends "app_hotel/base.html" %}
+
+{% block content %}
+    <h1> Customer List </h1>
+
+    {% if customer %}
+    <table class="table table-secondary table-striped my-5">
+        <thead>
+            <tr>
+                <th scope="col"> First Name </th>
+                <th scope="col"> Last Name </th>
+                <th scope="col"> Email </th>
+                <th scope="col"> Phone Number </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cust in customer %}
+            <tr>
+                <td>{{ cust.first_name }}</td>
+                <td>{{ cust.last_name }}</td>
+                <td>{{ cust.email }}</td>
+                <td>{{ cust.phone_number }}</td>
+
+                <td>  <a href="{% url 'updatecustomer' cust.id %}" class= "btn btn-warning btn-sm"> Edit </a>  
+                    {% comment %} id for specific record {% endcomment %}
+                    <form action="{% url 'deletecustomer' cust.id %}" method="POST" class="d-inline">
+                        {% csrf_token %}
+                        <input type="submit" value="Delete" class="btn btn-danger btn-sm">
+                    </form>
+                    </td> 
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <h4 class="text-center alert alert-warning"> No Records </h4>
+    {% endif %}
+{% endblock %}
